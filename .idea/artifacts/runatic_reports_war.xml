@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="runatic-reports:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="reports-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="runatic-reports:war exploded" />
+    </root>
+  </artifact>
+</component>
