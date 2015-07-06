@@ -14,35 +14,44 @@ import java.util.stream.Stream;
 
 /**
  * This class represents accessing the session data stored across the different data stores (internal staples,
- *  3rd party vendor etc).
+ * 3rd party vendor etc).
  */
-public class SessionDao {
+public abstract class SessionDao {
 
     private final File dataStore;
+    private final RowHandler rowHandler;
 
-    private SessionDao(String dataStoreName) {
+    public SessionDao(String dataStoreName, String separator) {
         URL resource = Thread.currentThread().getContextClassLoader().getResource(dataStoreName);
         if (resource == null) {
             throw new RuntimeException(String.format("Oh oh! The data store '%s' is not found. Something is not right here.", dataStoreName));
         }
         this.dataStore = new File(resource.getFile());
+        this.rowHandler = RowHandler.handlerFor(separator);
     }
 
-    public static SessionDao runaStore() {
-        return new SessionDao("staples_data.csv");
-    }
+    protected abstract Function<String, SessionEntry> rowMapper(String[] headers, RowHandler rowHandler);
 
     public List<SessionEntry> sessionEntries() {
-        try (Stream<String> lines = Files.lines(Paths.get(dataStore.toURI()))) {
-            try (Stream<SessionEntry> mapStream = lines.skip(1).map(rowMapper())) {
-                return mapStream.collect(Collectors.toList());
-            }
+        try (Stream<String> firstLineStream = Files.lines(Paths.get(dataStore.toURI()))) {
+            return sessionEntries(headers(firstLineStream));
         } catch (IOException e) {
             throw new RuntimeException(String.format("There was an error while reading the session entries from the data store: %s", dataStore.getName()));
         }
     }
 
-    private Function<String, SessionEntry> rowMapper() {
-        return line -> SessionEntry.fromStaplesStore(line.split(","));
+    private List<SessionEntry> sessionEntries(String[] headers) throws IOException {
+        try (Stream<String> lines = Files.lines(Paths.get(dataStore.toURI()))) {
+            try (Stream<SessionEntry> mapStream = lines.skip(1).map(rowMapper(headers, rowHandler))) {
+                return mapStream.collect(Collectors.toList());
+            }
+        }
     }
+
+    private String[] headers(Stream<String> firstLineStream) {
+        String[] headers = rowHandler.handle(firstLineStream.findFirst().get());
+        firstLineStream.close();
+        return headers;
+    }
+
 }

@@ -18,8 +18,20 @@ public class SessionEntry {
         this.sessionType = sessionType;
     }
 
-    public static SessionEntry fromStaplesStore(String[] cells) {
+    public static SessionEntry fromRunaDataStore(String[] headers, String[] cells) {
         return new SessionEntry(Long.parseLong(cells[0]), toInt(cells[1]), toInt(cells[2]), toInt(cells[3]), cells[4]);
+    }
+
+    public static SessionEntry fromExternalDataStore(String[] headers, String[] cells) {
+        return new SessionEntry(Long.parseLong(cells[0]), toInt(toFloat(cells[1]) * 100), toInt(toFloat(cells[3]) * 100), toInt(toFloat(cells[2]) * 100), cells[4].toLowerCase());
+    }
+
+    private static int toInt(float rate) {
+        return Math.round(rate);
+    }
+
+    private static float toFloat(String cell) {
+        return Float.parseFloat(cell);
     }
 
     private static int toInt(String cell) {
@@ -48,5 +60,16 @@ public class SessionEntry {
         result = 31 * result + runaDiscountInCents;
         result = 31 * result + sessionType.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SessionEntry{" +
+                "orderId=" + orderId +
+                ", unitPriceInCents=" + unitPriceInCents +
+                ", merchantDiscountInCents=" + merchantDiscountInCents +
+                ", runaDiscountInCents=" + runaDiscountInCents +
+                ", sessionType='" + sessionType + '\'' +
+                '}';
     }
 }

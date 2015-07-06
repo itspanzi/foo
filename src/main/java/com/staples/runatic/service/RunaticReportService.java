@@ -3,7 +3,8 @@ package com.staples.runatic.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.staples.runatic.dao.SessionDao;
+import com.staples.runatic.dao.ExternalSessionDao;
+import com.staples.runatic.dao.StaplesSessionDao;
 import com.staples.runatic.model.Report;
 import com.staples.runatic.model.SessionEntry;
 
@@ -37,11 +38,11 @@ public class RunaticReportService {
     }
 
     private List<SessionEntry> readStaplesSessionData() throws IOException {
-        return SessionDao.runaStore().sessionEntries();
+        return new StaplesSessionDao().sessionEntries();
     }
 
     private List<SessionEntry> readExternalSessionData() {
-        return null;
+        return new ExternalSessionDao().sessionEntries();
     }
 
     private Response errorResponse() {

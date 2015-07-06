@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b29f0077-98c9-452e-9c42-114cec117664" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/SessionDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/staples/runatic/dao/SessionDaoTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/staples/runatic/model/SessionEntry.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/staples/runatic/model/SessionEntryTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/staples/runatic/model/Summary.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/staples/runatic/model/Report.java" afterPath="$PROJECT_DIR$/src/main/java/com/staples/runatic/model/Report.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/ExternalSessionDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/RowHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/StaplesSessionDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/staples/runatic/service/RunaticReportService.java" afterPath="$PROJECT_DIR$/src/main/java/com/staples/runatic/service/RunaticReportService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/staples/runatic/service/RunaticReportServiceTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/staples/runatic/service/RunaticReportServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/SessionDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/SessionDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/staples/runatic/dao/SessionDaoTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/staples/runatic/dao/SessionDaoTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/staples/runatic/model/SessionEntry.java" afterPath="$PROJECT_DIR$/src/main/java/com/staples/runatic/model/SessionEntry.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/staples/runatic/model/SessionEntryTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/staples/runatic/model/SessionEntryTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="runatic-reports.iws" />
@@ -35,11 +34,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RunaticReportService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/service/RunaticReportService.java">
+      <file leaf-file-name="SessionDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/SessionDao.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
+              <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -47,24 +46,122 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RunaticReportServiceTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/staples/runatic/service/RunaticReportServiceTest.java">
+      <file leaf-file-name="StaplesSessionDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/StaplesSessionDao.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
+              <caret line="14" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#202#203#0" expanded="true" />
+                <element signature="e#261#262#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="ExternalSessionDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/ExternalSessionDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.12269939">
-              <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="58" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#204#205#0" expanded="true" />
+                <element signature="e#263#264#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RowHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/RowHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#592#593#0" expanded="true" />
+                <element signature="e#647#648#0" expanded="true" />
+                <element signature="e#779#780#0" expanded="true" />
+                <element signature="e#848#849#0" expanded="true" />
+                <element signature="e#977#978#0" expanded="true" />
+                <element signature="e#1026#1027#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Function.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/util/function/Function.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SessionEntryTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/staples/runatic/model/SessionEntryTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SessionEntry.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/model/SessionEntry.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <folding>
+                <element signature="e#1289#1290#0" expanded="true" />
+                <element signature="e#1328#1329#0" expanded="true" />
+                <element signature="e#1377#1378#0" expanded="true" />
+                <element signature="e#1422#1423#0" expanded="true" />
+                <element signature="e#1467#1468#0" expanded="true" />
+                <element signature="e#1512#1513#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Stream.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/util/stream/Stream.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="934" column="16" selection-start-line="934" selection-start-column="16" selection-end-line="934" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReferencePipeline.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/util/stream/ReferencePipeline.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="463" column="33" selection-start-line="463" selection-start-column="33" selection-end-line="463" selection-end-column="33" />
+              <folding>
+                <element signature="e#16940#16941#0" expanded="true" />
+                <element signature="e#16994#16995#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SessionDaoTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/staples/runatic/dao/SessionDaoTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.69325155">
+              <caret line="26" column="81" selection-start-line="26" selection-start-column="81" selection-end-line="26" selection-end-column="81" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,9 +171,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit3 Test Class" />
         <option value="JUnit4 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -99,13 +196,16 @@
         <option value="$PROJECT_DIR$/src/main/java/com/staples/runatic/model/Summary.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/staples/runatic/model/Report.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/staples/runatic/model/SessionDataEntry.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/staples/runatic/dao/SessionDaoTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/SessionDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/staples/runatic/model/SessionEntry.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/staples/runatic/model/SessionEntryTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/staples/runatic/service/RunaticReportService.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/staples/runatic/service/RunaticReportServiceTest.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/main/java/com/staples/runatic/service/RunaticReportService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/StaplesSessionDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/SessionDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/ExternalSessionDao.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/staples/runatic/model/SessionEntryTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/staples/runatic/model/SessionEntry.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/RowHandler.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/staples/runatic/dao/SessionDaoTest.java" />
       </list>
     </option>
   </component>
@@ -367,6 +467,10 @@
               <option name="myItemId" value="runatic" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -417,85 +521,7 @@
       <recent name="com.staples.runatic" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SessionEntryTest.shouldCreateSessionEntryForStaplesRowData">
-    <configuration default="false" name="RunaticReportServiceTest.shouldReturnTheReportSortedBySessionTypeDesc" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.staples.runatic.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="runatic-reports" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.staples.runatic.service" />
-      <option name="MAIN_CLASS_NAME" value="com.staples.runatic.service.RunaticReportServiceTest" />
-      <option name="METHOD_NAME" value="shouldReturnTheReportSortedBySessionTypeDesc" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="RunaticReportServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.staples.runatic.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="runatic-reports" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.staples.runatic.service" />
-      <option name="MAIN_CLASS_NAME" value="com.staples.runatic.service.RunaticReportServiceTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="RunaticReportServiceTest.shouldReturnUnprocessibleEntityWhenThereWasAnError" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.staples.runatic.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="runatic-reports" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.staples.runatic.service" />
-      <option name="MAIN_CLASS_NAME" value="com.staples.runatic.service.RunaticReportServiceTest" />
-      <option name="METHOD_NAME" value="shouldReturnUnprocessibleEntityWhenThereWasAnError" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.SessionDaoTest">
     <configuration default="false" name="SessionDaoTest.shouldReturnSessionDataForRunaStore" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -536,6 +562,84 @@
       <option name="MAIN_CLASS_NAME" value="com.staples.runatic.model.SessionEntryTest" />
       <option name="METHOD_NAME" value="shouldCreateSessionEntryForStaplesRowData" />
       <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="SessionDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.staples.runatic.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="runatic-reports" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.staples.runatic.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.staples.runatic.dao.SessionDaoTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="SessionEntryTest.shouldCreateSessionEntryForExternalDataSourceRowData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.staples.runatic.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="runatic-reports" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.staples.runatic.model" />
+      <option name="MAIN_CLASS_NAME" value="com.staples.runatic.model.SessionEntryTest" />
+      <option name="METHOD_NAME" value="shouldCreateSessionEntryForExternalDataSourceRowData" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="SessionEntryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.staples.runatic.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="runatic-reports" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.staples.runatic.model" />
+      <option name="MAIN_CLASS_NAME" value="com.staples.runatic.model.SessionEntryTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -788,19 +892,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.RunaticReportServiceTest.shouldReturnTheReportSortedBySessionTypeDesc" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.RunaticReportServiceTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.RunaticReportServiceTest.shouldReturnUnprocessibleEntityWhenThereWasAnError" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.SessionDaoTest.shouldReturnSessionDataForRunaStore" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.SessionEntryTest.shouldCreateSessionEntryForStaplesRowData" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.SessionDaoTest.shouldReturnSessionDataForRunaStore" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.SessionEntryTest.shouldCreateSessionEntryForStaplesRowData" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.SessionDaoTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.SessionEntryTest.shouldCreateSessionEntryForExternalDataSourceRowData" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.SessionEntryTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.SessionEntryTest.shouldCreateSessionEntryForStaplesRowData" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.SessionDaoTest.shouldReturnSessionDataForRunaStore" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.RunaticReportServiceTest.shouldReturnTheReportSortedBySessionTypeDesc" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.RunaticReportServiceTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.RunaticReportServiceTest.shouldReturnUnprocessibleEntityWhenThereWasAnError" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.SessionDaoTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.SessionEntryTest.shouldCreateSessionEntryForExternalDataSourceRowData" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.SessionEntryTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.SessionEntryTest.shouldCreateSessionEntryForStaplesRowData" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.SessionDaoTest.shouldReturnSessionDataForRunaStore" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -816,12 +920,12 @@
       <option name="number" value="Default" />
       <updated>1435892720167</updated>
       <workItem from="1435892721466" duration="4363000" />
-      <workItem from="1436122897771" duration="12051000" />
+      <workItem from="1436122897771" duration="15438000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16414000" />
+    <option name="totallyTimeSpent" value="19801000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="6" />
@@ -846,7 +950,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25751072" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33887467" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33887467" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -882,7 +986,7 @@
           <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="19" />
+      <option name="time" value="22" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -891,32 +995,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="75" selection-start-line="20" selection-start-column="75" selection-end-line="20" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/staples/runatic/service/RunaticReportServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/staples/runatic/service/RunaticReportServiceIntegrationTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -957,6 +1035,8 @@
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1670#1671#0" expanded="true" />
+            <element signature="e#1734#1735#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1246,16 +1326,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/staples/runatic/dao/SessionDaoTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="55" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/lang/ClassLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -1299,68 +1369,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/util/stream/Stream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="183" column="18" selection-start-line="183" selection-start-column="18" selection-end-line="183" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/staples/runatic/model/SessionEntryTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21472393">
-          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/model/SessionEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11042945">
-          <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
-          <folding>
-            <element signature="e#996#997#0" expanded="true" />
-            <element signature="e#1041#1042#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/SessionDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#977#978#0" expanded="true" />
-            <element signature="e#1034#1035#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/util/stream/ReferencePipeline.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="183" column="31" selection-start-line="183" selection-start-column="31" selection-end-line="183" selection-end-column="31" />
-          <folding>
-            <element signature="e#6007#6008#0" expanded="true" />
-            <element signature="e#6089#6090#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/service/RunaticReportService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/staples/runatic/service/RunaticReportServiceTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1373,9 +1381,141 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12269939">
+        <state vertical-scroll-proportion="0.0">
           <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/service/RunaticReportService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1670#1671#0" expanded="true" />
+            <element signature="e#1734#1735#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/util/stream/FindOps.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="49" selection-start-line="56" selection-start-column="49" selection-end-line="56" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/util/stream/ReferencePipeline.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="463" column="33" selection-start-line="463" selection-start-column="33" selection-end-line="463" selection-end-column="33" />
+          <folding>
+            <element signature="e#16940#16941#0" expanded="true" />
+            <element signature="e#16994#16995#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/util/stream/Stream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="934" column="16" selection-start-line="934" selection-start-column="16" selection-end-line="934" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/util/function/Function.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/StaplesSessionDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#202#203#0" expanded="true" />
+            <element signature="e#261#262#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/ExternalSessionDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="58" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#204#205#0" expanded="true" />
+            <element signature="e#263#264#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/staples/runatic/model/SessionEntryTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/model/SessionEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="e#1289#1290#0" expanded="true" />
+            <element signature="e#1328#1329#0" expanded="true" />
+            <element signature="e#1377#1378#0" expanded="true" />
+            <element signature="e#1422#1423#0" expanded="true" />
+            <element signature="e#1467#1468#0" expanded="true" />
+            <element signature="e#1512#1513#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/SessionDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/staples/runatic/dao/RowHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#592#593#0" expanded="true" />
+            <element signature="e#647#648#0" expanded="true" />
+            <element signature="e#779#780#0" expanded="true" />
+            <element signature="e#848#849#0" expanded="true" />
+            <element signature="e#977#978#0" expanded="true" />
+            <element signature="e#1026#1027#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/staples/runatic/dao/SessionDaoTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.69325155">
+          <caret line="26" column="81" selection-start-line="26" selection-start-column="81" selection-end-line="26" selection-end-column="81" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
