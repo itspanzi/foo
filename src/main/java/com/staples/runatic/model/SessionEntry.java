@@ -72,4 +72,14 @@ public class SessionEntry {
                 ", sessionType='" + sessionType + '\'' +
                 '}';
     }
+
+    public long getOrderId() {
+        return orderId;
+    }
+
+
+    public String getSessionType() {
+        return sessionType;
+    }
+
 }

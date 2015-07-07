@@ -3,8 +3,8 @@ package com.staples.runatic.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.staples.runatic.dao.ExternalSessionDao;
-import com.staples.runatic.dao.StaplesSessionDao;
+import com.staples.runatic.data.ExternalSessionData;
+import com.staples.runatic.data.StaplesSessionData;
 import com.staples.runatic.model.Report;
 import com.staples.runatic.model.SessionEntry;
 
@@ -12,7 +12,11 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Path("/runatic")
 public class RunaticReportService {
@@ -23,9 +27,9 @@ public class RunaticReportService {
     @Path("/report")
     @Produces(MediaType.APPLICATION_JSON)
     public Response report(@DefaultValue("session-type-desc") @QueryParam("order_by") String orderBy) throws IOException {
-        List<SessionEntry> externalData =  readExternalSessionData();
-        List<SessionEntry> internalData =  readStaplesSessionData();
-        Report report = prepareReport(externalData, internalData);
+        Stream<SessionEntry> externalData =  readExternalSessionData();
+        Stream<SessionEntry> internalData =  readStaplesSessionData();
+        Report report = prepareReport(externalData, internalData, orderBy);
         try {
             return Response.status(Response.Status.OK).entity(toJson(report)).build();
         } catch (Exception e) {
@@ -33,16 +37,24 @@ public class RunaticReportService {
         }
     }
 
-    private Report prepareReport(List<SessionEntry> externalData, List<SessionEntry> internalData) {
+    private Report prepareReport(Stream<SessionEntry> externalData, Stream<SessionEntry> internalData, String orderBy) {
+
+        Stream<SessionEntry> entries = Stream.concat(externalData, internalData).
+                sorted(Comparator.comparing(SessionEntry::getSessionType).reversed());
+
+        Map<Long, List<SessionEntry>> map = entries.collect(Collectors.groupingBy(SessionEntry::getOrderId));
+
+        System.out.println("Map : " + map);
+
         return new Report();
     }
 
-    private List<SessionEntry> readStaplesSessionData() throws IOException {
-        return new StaplesSessionDao().sessionEntries();
+    private Stream<SessionEntry> readStaplesSessionData() throws IOException {
+        return new StaplesSessionData().entriesStream();
     }
 
-    private List<SessionEntry> readExternalSessionData() {
-        return new ExternalSessionDao().sessionEntries();
+    private Stream<SessionEntry> readExternalSessionData() {
+        return new ExternalSessionData().entriesStream();
     }
 
     private Response errorResponse() {

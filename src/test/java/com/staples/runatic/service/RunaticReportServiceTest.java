@@ -33,7 +33,7 @@ public class RunaticReportServiceTest extends JerseyTest {
         Response response = getReport("session-type-desc");
         assertSuccess(response);
         Map actualJson = responseJson(response);
-        assertThat(expectedJson, is(actualJson));
+        assertThat(actualJson, is(expectedJson));
     }
 
     private Response getReport(String orderBy) {
