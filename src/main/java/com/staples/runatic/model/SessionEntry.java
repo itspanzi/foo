@@ -77,9 +77,19 @@ public class SessionEntry {
         return orderId;
     }
 
-
     public String getSessionType() {
         return sessionType;
     }
 
+    public int getUnitPriceInCents() {
+        return unitPriceInCents;
+    }
+
+    public int getMerchantDiscountInCents() {
+        return merchantDiscountInCents;
+    }
+
+    public int getRunaDiscountInCents() {
+        return runaDiscountInCents;
+    }
 }
