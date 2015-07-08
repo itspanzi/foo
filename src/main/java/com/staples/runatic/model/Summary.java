@@ -1,13 +1,16 @@
 package com.staples.runatic.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * This class represents a report summary
  */
 public class Summary {
 
-    private int unitPriceInCents;
-    private int merchantDiscountInCents;
-    private int runaDiscountInCents;
+    @JsonIgnore private int unitPriceInCents;
+    @JsonIgnore private int merchantDiscountInCents;
+    @JsonIgnore private int runaDiscountInCents;
 
     public Summary() {
         this(0, 0, 0);
@@ -23,6 +26,23 @@ public class Summary {
         this.unitPriceInCents += unitPriceInCents;
         this.merchantDiscountInCents += merchantDiscountInCents;
         this.runaDiscountInCents += runaDiscountInCents;
+    }
+
+    @JsonProperty("unit-price-dollars")
+    public double getUnitPriceInDollars() {
+        return ((double) unitPriceInCents) / 100;
+    }
+
+
+    @JsonProperty("merchant-discount-dollars")
+    public double getMerchantDiscountDollars() {
+        return ((double) merchantDiscountInCents) / 100;
+    }
+
+
+    @JsonProperty("runa-discount-dollars")
+    public double getRunaDiscountDollars() {
+        return ((double) runaDiscountInCents) / 100;
     }
 
     @Override

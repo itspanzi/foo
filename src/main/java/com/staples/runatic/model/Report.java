@@ -1,5 +1,6 @@
 package com.staples.runatic.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.staples.runatic.data.ExternalSessionData;
 import com.staples.runatic.data.StaplesSessionData;
 
@@ -10,10 +11,11 @@ import java.util.stream.Stream;
 
 public class Report {
     public static final String SESSION_TYPE_DESC = "session-type-desc";
+
     private final Map<String, Summary> summaries = new HashMap<>();
 
-    private final StaplesSessionData staplesSessionData;
-    private final ExternalSessionData externalSessionData;
+    @JsonIgnore private final StaplesSessionData staplesSessionData;
+    @JsonIgnore private final ExternalSessionData externalSessionData;
 
     public Report(StaplesSessionData staplesSessionData, ExternalSessionData externalSessionData) {
         this.staplesSessionData = staplesSessionData;
@@ -54,7 +56,7 @@ public class Report {
         return externalSessionData.entriesStream();
     }
 
-    public Summary summaryFor(String summaryType) {
+    Summary summaryFor(String summaryType) {
         return summaries.get(summaryType);
     }
 }

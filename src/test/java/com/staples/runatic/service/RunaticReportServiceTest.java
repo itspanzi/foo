@@ -27,7 +27,6 @@ public class RunaticReportServiceTest extends JerseyTest {
     }
 
     @Test
-    @Ignore
     public void shouldReturnTheReportSortedBySessionTypeDesc() throws IOException {
         Map expectedJson = expectedJsonForSortedSession();
         Response response = getReport("session-type-desc");
