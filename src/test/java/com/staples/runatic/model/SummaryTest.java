@@ -18,4 +18,14 @@ public class SummaryTest {
         assertThat(map.containsKey("merchant-discount-dollars"), is(true));
         assertThat(map.containsKey("runa-discount-dollars"), is(true));
     }
+
+    @Test
+    public void shouldReturnInDollars() throws Exception {
+        Summary summary = new Summary(3400, 3499, 1001);
+        Map map = new ObjectMapper().readValue(new ObjectMapper().writeValueAsString(summary), Map.class);
+        assertThat(map.get("unit-price-dollars"), is(34.0));
+        assertThat(map.get("merchant-discount-dollars"), is(34.99));
+        assertThat(map.get("runa-discount-dollars"), is(10.01));
+
+    }
 }
