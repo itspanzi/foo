@@ -26,6 +26,5 @@ public class SummaryTest {
         assertThat(map.get("unit-price-dollars"), is(34.0));
         assertThat(map.get("merchant-discount-dollars"), is(34.99));
         assertThat(map.get("runa-discount-dollars"), is(10.01));
-
     }
 }

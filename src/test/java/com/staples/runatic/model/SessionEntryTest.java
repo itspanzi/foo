@@ -1,25 +1,37 @@
 package com.staples.runatic.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
+
+import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 public class SessionEntryTest {
 
     @Test
-    public void shouldCreateSessionEntryForStaplesRowData() {
-        String header = "Order ID,Unit Price Cents,Merchant Discount Cents,Runa Discount Cents,Session Type";
-        String row = "72144305,11050,1000,2020,control";
-        SessionEntry sessionEntry = SessionEntry.fromRunaDataStore(header.split(","), row.split(","));
-        assertThat(sessionEntry, is(new SessionEntry(72144305, 11050, 1000, 2020, "control")));
+    public void shouldSerialiseWithTheExpectedNames() throws Exception {
+        SessionEntry entry = new SessionEntry(72144305, 11000, 1020, 2050, "control");
+
+        Map map = new ObjectMapper().readValue(new ObjectMapper().writeValueAsString(entry), Map.class);
+        assertThat(map.containsKey("unit-price-dollars"), is(true));
+        assertThat(map.containsKey("merchant-discount-dollars"), is(true));
+        assertThat(map.containsKey("runa-discount-dollars"), is(true));
+        assertThat(map.containsKey("session-type"), is(true));
+        assertThat(map.containsKey("order-id"), is(true));
     }
 
     @Test
-    public void shouldCreateSessionEntryForExternalDataSourceRowData() {
-        String header = "Order ID|Unit Price Dollars|Runa Discount Dollars|Merchant Discount Dollars|Session Type";
-        String row = "72144305|110.0|20.5|10.2|CONTROL";
-        SessionEntry sessionEntry = SessionEntry.fromExternalDataStore(header.split("\\|"), row.split("\\|"));
-        assertThat(sessionEntry, is(new SessionEntry(72144305, 11000, 1020, 2050, "control")));
+    public void shouldReturnTheRatesInDollars() throws Exception {
+        SessionEntry entry = new SessionEntry(72144305, 11001, 1020, 2000, "control");
+
+        Map map = new ObjectMapper().readValue(new ObjectMapper().writeValueAsString(entry), Map.class);
+
+        assertThat(map.get("unit-price-dollars"), is(110.01));
+        assertThat(map.get("merchant-discount-dollars"), is(10.2));
+        assertThat(map.get("runa-discount-dollars"), is(20.0));
     }
+
 }

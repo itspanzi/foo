@@ -1,6 +1,7 @@
 package com.staples.runatic.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.staples.runatic.model.Report;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Ignore;
@@ -9,6 +10,7 @@ import org.junit.Test;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,10 +30,10 @@ public class RunaticReportServiceTest extends JerseyTest {
 
     @Test
     public void shouldReturnTheReportSortedBySessionTypeDesc() throws IOException {
-        Map expectedJson = expectedJsonForSortedSession();
+        Report expectedJson = expectedJsonForSortedSession();
         Response response = getReport("session-type-desc");
         assertSuccess(response);
-        Map actualJson = responseJson(response);
+        Report actualJson = responseJson(response);
         assertThat(actualJson, is(expectedJson));
     }
 
@@ -43,15 +45,15 @@ public class RunaticReportServiceTest extends JerseyTest {
         assertThat(response.getStatus(), is(Response.Status.OK.getStatusCode()));
     }
 
-    private Map responseJson(Response response) throws IOException {
+    private Report responseJson(Response response) throws IOException {
         return generateJson(response.readEntity(String.class));
     }
 
-    private Map generateJson(String jsonString) throws IOException {
-        return new ObjectMapper().readValue(jsonString.getBytes(), Map.class);
+    private Report generateJson(String jsonString) throws IOException {
+        return new ObjectMapper().readValue(jsonString.getBytes(), Report.class);
     }
 
-    private Map expectedJsonForSortedSession() throws IOException {
+    private Report expectedJsonForSortedSession() throws IOException {
         String expectedJson = "{ " +
                 "\"summaries\":" +
                 "{\"runa-summary\": { \"unit-price-dollars\":360.5, \"merchant-discount-dollars\":15.0, \"runa-discount-dollars\":65.2}, " +

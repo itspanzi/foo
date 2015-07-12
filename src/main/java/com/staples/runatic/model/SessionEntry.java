@@ -1,14 +1,17 @@
 package com.staples.runatic.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * This class represents a row in the session data store (either the internal or the third party data)
  */
 public class SessionEntry {
-    private final long orderId;
-    private final int unitPriceInCents;
-    private final int merchantDiscountInCents;
-    private final int runaDiscountInCents;
-    private final String sessionType;
+    @JsonProperty("order-id") private final long orderId;
+    @JsonProperty("session-type") private final String sessionType;
+    @JsonIgnore private final int unitPriceInCents;
+    @JsonIgnore private final int merchantDiscountInCents;
+    @JsonIgnore private final int runaDiscountInCents;
 
     public SessionEntry(long orderId, int unitPriceInCents, int merchantDiscountInCents, int runaDiscountInCents, String sessionType) {
         this.orderId = orderId;
@@ -16,26 +19,6 @@ public class SessionEntry {
         this.merchantDiscountInCents = merchantDiscountInCents;
         this.runaDiscountInCents = runaDiscountInCents;
         this.sessionType = sessionType;
-    }
-
-    public static SessionEntry fromRunaDataStore(String[] headers, String[] cells) {
-        return new SessionEntry(Long.parseLong(cells[0]), toInt(cells[1]), toInt(cells[2]), toInt(cells[3]), cells[4]);
-    }
-
-    public static SessionEntry fromExternalDataStore(String[] headers, String[] cells) {
-        return new SessionEntry(Long.parseLong(cells[0]), toInt(toFloat(cells[1]) * 100), toInt(toFloat(cells[3]) * 100), toInt(toFloat(cells[2]) * 100), cells[4].toLowerCase());
-    }
-
-    private static int toInt(float rate) {
-        return Math.round(rate);
-    }
-
-    private static float toFloat(String cell) {
-        return Float.parseFloat(cell);
-    }
-
-    private static int toInt(String cell) {
-        return Integer.parseInt(cell);
     }
 
     @Override
@@ -92,4 +75,20 @@ public class SessionEntry {
     public int getRunaDiscountInCents() {
         return runaDiscountInCents;
     }
+
+    @JsonProperty("unit-price-dollars")
+    public double getUnitPriceInDollars() {
+        return (double) unitPriceInCents / 100;
+    }
+
+    @JsonProperty("merchant-discount-dollars")
+    public double getMerchantDiscountInDollars() {
+        return (double) merchantDiscountInCents / 100;
+    }
+
+    @JsonProperty("runa-discount-dollars")
+    public double getRunaDiscountInDollars() {
+        return (double) runaDiscountInCents / 100;
+    }
+
 }

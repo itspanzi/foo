@@ -4,6 +4,8 @@ import com.staples.runatic.model.SessionEntry;
 
 import java.util.function.Function;
 
+import static java.lang.Integer.parseInt;
+
 public class StaplesSessionData extends AbstractSessionDao {
     public StaplesSessionData() {
         this("staples_data.csv");
@@ -15,11 +17,14 @@ public class StaplesSessionData extends AbstractSessionDao {
 
     @Override
     protected Function<String, SessionEntry> rowMapper(RowHandler rowHandler) {
-        return line -> SessionEntry.fromRunaDataStore(new String[]{}, rowHandler.handle(line));
+        return line -> {
+            String[] cells = rowHandler.handle(line);
+            return new SessionEntry(Long.parseLong(cells[0]), parseInt(cells[1]), parseInt(cells[2]), parseInt(cells[3]), cells[4]);
+        };
     }
 
     @Override
     protected String[] expectedHeaders() {
-        return new String[] { "Order ID", "Unit Price Cents", "Merchant Discount Cents", "Runa Discount Cents", "Session Type"};
+        return new String[]{"Order ID", "Unit Price Cents", "Merchant Discount Cents", "Runa Discount Cents", "Session Type"};
     }
 }
