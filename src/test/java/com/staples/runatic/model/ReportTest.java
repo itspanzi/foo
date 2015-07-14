@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import static com.staples.runatic.model.Report.ORDER_ID_ASC;
 import static com.staples.runatic.model.Report.SESSION_TYPE_DESC;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -47,6 +48,40 @@ public class ReportTest {
                 new Order(new SessionEntry("4455", 12500, 1500, 3000, "unmanaged"), new SessionEntry("4455", 12500, 1000, 3000, "unmanaged")),
                 new Order(new SessionEntry("5678", 3500, 0, 100, "test"), new SessionEntry("5678", 3500, 0, 100, "test")),
                 new Order(new SessionEntry("1234", 100, 18, 15, "control"), new SessionEntry("1234", 200, 10, 10, "control")))));
+    }
+
+    @Test
+    public void shouldReturnOrdersSortedBySessionTypeIfNoOrderIsSpecified() throws Exception {
+        StaplesSessionData staplesMock = mock(StaplesSessionData.class);
+        ExternalSessionData externalMock = mock(ExternalSessionData.class);
+        when(staplesMock.entriesStream()).thenReturn(staplesEntries());
+        when(externalMock.entriesStream()).thenReturn(enternalEntries());
+
+        Report report = new Report(staplesMock, externalMock);
+
+        report.generateReport("");
+
+        assertThat(report.getOrders(), is(Arrays.asList(
+                new Order(new SessionEntry("4455", 12500, 1500, 3000, "unmanaged"), new SessionEntry("4455", 12500, 1000, 3000, "unmanaged")),
+                new Order(new SessionEntry("5678", 3500, 0, 100, "test"), new SessionEntry("5678", 3500, 0, 100, "test")),
+                new Order(new SessionEntry("1234", 100, 18, 15, "control"), new SessionEntry("1234", 200, 10, 10, "control")))));
+    }
+
+    @Test
+    public void shouldReturnOrdersSortedByOrderIdAscending() throws Exception {
+        StaplesSessionData staplesMock = mock(StaplesSessionData.class);
+        ExternalSessionData externalMock = mock(ExternalSessionData.class);
+        when(staplesMock.entriesStream()).thenReturn(staplesEntries());
+        when(externalMock.entriesStream()).thenReturn(enternalEntries());
+
+        Report report = new Report(staplesMock, externalMock);
+
+        report.generateReport(ORDER_ID_ASC);
+
+        assertThat(report.getOrders(), is(Arrays.asList(
+                new Order(new SessionEntry("1234", 100, 18, 15, "control"), new SessionEntry("1234", 200, 10, 10, "control")),
+                new Order(new SessionEntry("4455", 12500, 1500, 3000, "unmanaged"), new SessionEntry("4455", 12500, 1000, 3000, "unmanaged")),
+                new Order(new SessionEntry("5678", 3500, 0, 100, "test"), new SessionEntry("5678", 3500, 0, 100, "test")))));
     }
 
     @Test
