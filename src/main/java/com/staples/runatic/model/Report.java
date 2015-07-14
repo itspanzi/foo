@@ -1,6 +1,7 @@
 package com.staples.runatic.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.staples.runatic.data.ExternalSessionData;
 import com.staples.runatic.data.StaplesSessionData;
 
@@ -12,8 +13,8 @@ import static java.util.stream.Collectors.groupingBy;
 public class Report {
     public static final String SESSION_TYPE_DESC = "session-type-desc";
 
-    private final Map<String, Summary> summaries;
-    private final List<Order> orders;
+    @JsonProperty("summaries") private final Map<String, Summary> summaries;
+    @JsonProperty("orders") private final List<Order> orders;
 
     @JsonIgnore
     private final StaplesSessionData staplesSessionData;
@@ -40,9 +41,9 @@ public class Report {
         Stream<SessionEntry> externalData = readExternalSessionData();
         Stream<SessionEntry> staplesData = readStaplesSessionData();
 
-        Map<Long, List<SessionEntry>> staplesOrderData = staplesData.collect(groupingBy(SessionEntry::getOrderId));
-        Map<Long, List<SessionEntry>> externalOrderData = externalData.collect(groupingBy(SessionEntry::getOrderId));
-        Stream<Long> orderIds = sortEntries(staplesOrderData).map(Map.Entry::getKey);
+        Map<String, List<SessionEntry>> staplesOrderData = staplesData.collect(groupingBy(SessionEntry::getOrderId));
+        Map<String, List<SessionEntry>> externalOrderData = externalData.collect(groupingBy(SessionEntry::getOrderId));
+        Stream<String> orderIds = sortEntries(staplesOrderData).map(Map.Entry::getKey);
 
         orderIds.forEach(orderId -> {
             SessionEntry staplesEntry = staplesOrderData.get(orderId).get(0);
@@ -53,15 +54,15 @@ public class Report {
         });
     }
 
-    private Stream<Map.Entry<Long, List<SessionEntry>>> sortEntries(Map<Long, List<SessionEntry>> orderToSessionData) {
+    private Stream<Map.Entry<String, List<SessionEntry>>> sortEntries(Map<String, List<SessionEntry>> orderToSessionData) {
         return orderToSessionData.entrySet().stream().sorted(sessionComparator().reversed());
     }
 
-    private Comparator<Map.Entry<Long, List<SessionEntry>>> sessionComparator() {
+    private Comparator<Map.Entry<String, List<SessionEntry>>> sessionComparator() {
         return (o1, o2) -> sessionTypeFor(o1).compareTo(sessionTypeFor(o2));
     }
 
-    private String sessionTypeFor(Map.Entry<Long, List<SessionEntry>> o1) {
+    private String sessionTypeFor(Map.Entry<String, List<SessionEntry>> o1) {
         return o1.getValue().get(0).getSessionType();
     }
 
@@ -82,7 +83,7 @@ public class Report {
         return summaries.get(summaryType);
     }
 
-    List<Order> orders() {
+    List<Order> getOrders() {
         return orders;
     }
 }

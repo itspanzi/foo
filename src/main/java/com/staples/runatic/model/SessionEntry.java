@@ -7,13 +7,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * This class represents a row in the session data store (either the internal or the third party data)
  */
 public class SessionEntry {
-    @JsonProperty("order-id") private final long orderId;
+    @JsonProperty("order-id") private final String orderId;
     @JsonProperty("session-type") private final String sessionType;
     @JsonIgnore private final int unitPriceInCents;
     @JsonIgnore private final int merchantDiscountInCents;
     @JsonIgnore private final int runaDiscountInCents;
 
-    public SessionEntry(long orderId, int unitPriceInCents, int merchantDiscountInCents, int runaDiscountInCents, String sessionType) {
+    public SessionEntry(String orderId, int unitPriceInCents, int merchantDiscountInCents, int runaDiscountInCents, String sessionType) {
         this.orderId = orderId;
         this.unitPriceInCents = unitPriceInCents;
         this.merchantDiscountInCents = merchantDiscountInCents;
@@ -28,20 +28,21 @@ public class SessionEntry {
 
         SessionEntry that = (SessionEntry) o;
 
-        if (orderId != that.orderId) return false;
         if (unitPriceInCents != that.unitPriceInCents) return false;
         if (merchantDiscountInCents != that.merchantDiscountInCents) return false;
         if (runaDiscountInCents != that.runaDiscountInCents) return false;
+        if (!orderId.equals(that.orderId)) return false;
         return sessionType.equals(that.sessionType);
+
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (orderId ^ (orderId >>> 32));
+        int result = orderId.hashCode();
+        result = 31 * result + sessionType.hashCode();
         result = 31 * result + unitPriceInCents;
         result = 31 * result + merchantDiscountInCents;
         result = 31 * result + runaDiscountInCents;
-        result = 31 * result + sessionType.hashCode();
         return result;
     }
 
@@ -56,7 +57,7 @@ public class SessionEntry {
                 '}';
     }
 
-    public long getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 

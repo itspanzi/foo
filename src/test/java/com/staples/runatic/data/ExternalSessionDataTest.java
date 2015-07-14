@@ -16,9 +16,9 @@ public class ExternalSessionDataTest {
     public void shouldReturnSessionDataForExternalStore() {
         List<SessionEntry> entries = new ExternalSessionData().entriesStream().collect(Collectors.toList());
         assertThat(entries.size(), is(3));
-        assertThat(entries.get(0), is(new SessionEntry(72144305, 11000, 1020, 2050, "control")));
-        assertThat(entries.get(1), is(new SessionEntry(72144777, 20000, 0, 3000, "test")));
-        assertThat(entries.get(2), is(new SessionEntry(72145239, 5000, 200, 1480, "unmanaged")));
+        assertThat(entries.get(0), is(new SessionEntry("72144305", 11000, 1020, 2050, "control")));
+        assertThat(entries.get(1), is(new SessionEntry("72144777", 20000, 0, 3000, "test")));
+        assertThat(entries.get(2), is(new SessionEntry("72145239", 5000, 200, 1480, "unmanaged")));
     }
 
     @Test

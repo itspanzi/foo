@@ -19,7 +19,7 @@ public class StaplesSessionData extends AbstractSessionDao {
     protected Function<String, SessionEntry> rowMapper(RowHandler rowHandler) {
         return line -> {
             String[] cells = rowHandler.handle(line);
-            return new SessionEntry(Long.parseLong(cells[0]), parseInt(cells[1]), parseInt(cells[2]), parseInt(cells[3]), cells[4]);
+            return new SessionEntry(cells[0], parseInt(cells[1]), parseInt(cells[2]), parseInt(cells[3]), cells[4]);
         };
     }
 

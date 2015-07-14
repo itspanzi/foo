@@ -13,7 +13,7 @@ public class SessionEntryTest {
 
     @Test
     public void shouldSerialiseWithTheExpectedNames() throws Exception {
-        SessionEntry entry = new SessionEntry(72144305, 11000, 1020, 2050, "control");
+        SessionEntry entry = new SessionEntry("72144305", 11000, 1020, 2050, "control");
 
         Map map = new ObjectMapper().readValue(new ObjectMapper().writeValueAsString(entry), Map.class);
         assertThat(map.containsKey("unit-price-dollars"), is(true));
@@ -25,7 +25,7 @@ public class SessionEntryTest {
 
     @Test
     public void shouldReturnTheRatesInDollars() throws Exception {
-        SessionEntry entry = new SessionEntry(72144305, 11001, 1020, 2000, "control");
+        SessionEntry entry = new SessionEntry("72144305", 11001, 1020, 2000, "control");
 
         Map map = new ObjectMapper().readValue(new ObjectMapper().writeValueAsString(entry), Map.class);
 

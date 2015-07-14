@@ -22,7 +22,7 @@ public class ExternalSessionData extends AbstractSessionDao {
     protected Function<String, SessionEntry> rowMapper(RowHandler rowHandler) {
         return line -> {
             String[] cells = rowHandler.handle(line);
-            return new SessionEntry(Long.parseLong(cells[0]), round(parseFloat(cells[1]) * 100),
+            return new SessionEntry(cells[0], round(parseFloat(cells[1]) * 100),
                     round(parseFloat(cells[3]) * 100), round(parseFloat(cells[2]) * 100), cells[4].toLowerCase());
         };
     }

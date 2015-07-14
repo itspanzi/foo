@@ -6,7 +6,6 @@ import com.staples.runatic.data.StaplesSessionData;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -44,10 +43,10 @@ public class ReportTest {
 
         report.generateReport(SESSION_TYPE_DESC);
 
-        assertThat(report.orders(), is(Arrays.asList(
-                new Order(new SessionEntry(4455, 12500, 1500, 3000, "unmanaged"), new SessionEntry(4455, 12500, 1000, 3000, "unmanaged")),
-                new Order(new SessionEntry(5678, 3500, 0, 100, "test"), new SessionEntry(5678, 3500, 0, 100, "test")),
-                new Order(new SessionEntry(1234, 100, 18, 15, "control"), new SessionEntry(1234, 200, 10, 10, "control")))));
+        assertThat(report.getOrders(), is(Arrays.asList(
+                new Order(new SessionEntry("4455", 12500, 1500, 3000, "unmanaged"), new SessionEntry("4455", 12500, 1000, 3000, "unmanaged")),
+                new Order(new SessionEntry("5678", 3500, 0, 100, "test"), new SessionEntry("5678", 3500, 0, 100, "test")),
+                new Order(new SessionEntry("1234", 100, 18, 15, "control"), new SessionEntry("1234", 200, 10, 10, "control")))));
     }
 
     @Test
@@ -66,12 +65,12 @@ public class ReportTest {
     }
 
     private Stream<SessionEntry> enternalEntries() {
-        return Arrays.asList(new SessionEntry(1234, 200, 10, 10, "control"), new SessionEntry(5678, 3500, 0, 100, "test"),
-                new SessionEntry(4455, 12500, 1000, 3000, "unmanaged")).stream();
+        return Arrays.asList(new SessionEntry("1234", 200, 10, 10, "control"), new SessionEntry("5678", 3500, 0, 100, "test"),
+                new SessionEntry("4455", 12500, 1000, 3000, "unmanaged")).stream();
     }
 
     private Stream<SessionEntry> staplesEntries() {
-        return Arrays.asList(new SessionEntry(1234, 100, 18, 15, "control"), new SessionEntry(5678, 3500, 0, 100, "test"),
-                new SessionEntry(4455, 12500, 1500, 3000, "unmanaged")).stream();
+        return Arrays.asList(new SessionEntry("1234", 100, 18, 15, "control"), new SessionEntry("5678", 3500, 0, 100, "test"),
+                new SessionEntry("4455", 12500, 1500, 3000, "unmanaged")).stream();
     }
 }
