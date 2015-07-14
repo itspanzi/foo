@@ -13,6 +13,7 @@ import static java.util.stream.Collectors.groupingBy;
 public class Report {
     public static final String SESSION_TYPE_DESC = "session-type-desc";
     public static final String ORDER_ID_ASC = "order-id-asc";
+    public static final String UNIT_PRICE_DOLLARS_ASC = "unit-price-dollars-asc";
 
     @JsonProperty("summaries") private final Map<String, Summary> summaries;
     @JsonProperty("orders") private final List<Order> orders;
@@ -59,8 +60,14 @@ public class Report {
         Comparator<Map.Entry<String, List<SessionEntry>>> comparator = sessionComparator().reversed();
         if (ORDER_ID_ASC.equals(orderBy)) {
             comparator = orderIdComparator();
+        } else if (UNIT_PRICE_DOLLARS_ASC.equals(orderBy)) {
+            comparator = unitPriceComparator();
         }
         return orderToSessionData.entrySet().stream().sorted(comparator);
+    }
+
+    private Comparator<Map.Entry<String, List<SessionEntry>>> unitPriceComparator() {
+        return (o1, o2) -> entryFrom(o1).getUnitPriceInCents() - entryFrom(o2).getUnitPriceInCents();
     }
 
     private Comparator<Map.Entry<String, List<SessionEntry>>> orderIdComparator() {
