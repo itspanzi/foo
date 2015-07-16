@@ -1,4 +1,4 @@
-package com.staples.runatic.data;
+package com.staples.runatic.persistence;
 
 import com.staples.runatic.model.SessionEntry;
 
@@ -14,12 +14,12 @@ import java.util.stream.Stream;
 /**
  * This class represents streaming session data that is stored in a file.
  */
-public abstract class AbstractSessionDao {
+public abstract class AbstractSessionPersistence {
 
     private final File dataStore;
     private final RowHandler rowHandler;
 
-    public AbstractSessionDao(String dataStoreName, String separator) {
+    public AbstractSessionPersistence(String dataStoreName, String separator) {
         URL resource = Thread.currentThread().getContextClassLoader().getResource(dataStoreName);
         if (resource == null) {
             throw new RuntimeException(String.format("Oh oh! The data store '%s' is not found. Something is not right here.", dataStoreName));

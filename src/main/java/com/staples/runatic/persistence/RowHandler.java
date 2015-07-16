@@ -1,4 +1,4 @@
-package com.staples.runatic.data;
+package com.staples.runatic.persistence;
 
 import java.util.Arrays;
 import java.util.HashMap;

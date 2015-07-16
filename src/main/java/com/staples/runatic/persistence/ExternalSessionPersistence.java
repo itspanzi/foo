@@ -1,4 +1,4 @@
-package com.staples.runatic.data;
+package com.staples.runatic.persistence;
 
 import com.staples.runatic.model.SessionEntry;
 
@@ -8,13 +8,13 @@ import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.round;
 
-public class ExternalSessionData extends AbstractSessionDao {
+public class ExternalSessionPersistence extends AbstractSessionPersistence {
 
-    public ExternalSessionData() {
+    public ExternalSessionPersistence() {
         this("external_data.psv");
     }
 
-    ExternalSessionData(String fileName) {
+    ExternalSessionPersistence(String fileName) {
         super(fileName, RowHandler.PIPE);
     }
 

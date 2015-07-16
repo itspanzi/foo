@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.staples.runatic.data.ExternalSessionData;
-import com.staples.runatic.data.StaplesSessionData;
+import com.staples.runatic.persistence.ExternalSessionPersistence;
+import com.staples.runatic.persistence.StaplesSessionPersistence;
 import com.staples.runatic.model.Report;
 
+import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,16 +17,15 @@ import java.io.IOException;
 import static com.staples.runatic.model.Report.SESSION_TYPE_DESC;
 
 @Path("/runatic")
+@Singleton
 public class RunaticReportService {
 
     private static final String ERROR_JSON = "{ 'message' : 'There was an error while processing the request. Please check the logs for more in.' }";
 
-    private final StaplesSessionData staplesSessionData;
-    private final ExternalSessionData externalSessionData;
+    private final ReportGeneratorService report;
 
     public RunaticReportService() {
-        staplesSessionData = new StaplesSessionData();
-        externalSessionData = new ExternalSessionData();
+        report = new ReportGeneratorService(new StaplesSessionPersistence(), new ExternalSessionPersistence());
     }
 
     @GET
@@ -42,9 +41,7 @@ public class RunaticReportService {
     }
 
     private Report prepareReport(String orderBy) {
-        Report report = new Report(staplesSessionData, externalSessionData);
-        report.generateReport(orderBy);
-        return report;
+        return report.generateReport(orderBy);
     }
 
     private Response errorResponse() {

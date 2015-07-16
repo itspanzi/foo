@@ -1,4 +1,4 @@
-package com.staples.runatic.data;
+package com.staples.runatic.persistence;
 
 import com.staples.runatic.model.SessionEntry;
 
@@ -6,12 +6,12 @@ import java.util.function.Function;
 
 import static java.lang.Integer.parseInt;
 
-public class StaplesSessionData extends AbstractSessionDao {
-    public StaplesSessionData() {
+public class StaplesSessionPersistence extends AbstractSessionPersistence {
+    public StaplesSessionPersistence() {
         this("staples_data.csv");
     }
 
-    StaplesSessionData(String fileName) {
+    StaplesSessionPersistence(String fileName) {
         super(fileName, RowHandler.COMMA);
     }
 
