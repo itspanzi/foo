@@ -57,8 +57,8 @@ public class SessionEntry {
                 '}';
     }
 
-    public String getOrderId() {
-        return orderId;
+    public long getOrderId() {
+        return Long.parseLong(orderId);
     }
 
     public String getSessionType() {
