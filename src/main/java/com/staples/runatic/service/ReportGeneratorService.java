@@ -29,11 +29,10 @@ public class ReportGeneratorService {
 
         Map<Long, List<SessionEntry>> staplesOrderData = staplesData.collect(groupingBy(SessionEntry::getOrderId));
         Map<Long, List<SessionEntry>> externalOrderData = externalData.collect(groupingBy(SessionEntry::getOrderId));
-        Stream<Long> orderIds = sortEntries(staplesOrderData, orderBy).map(Entry::getKey);
 
         Report report = new Report();
 
-        orderIds.forEach(orderId -> {
+        sortedEntryIds(staplesOrderData, orderBy).forEach(orderId -> {
             SessionEntry staplesEntry = staplesOrderData.get(orderId).get(0);
             SessionEntry externalEntry = externalOrderData.get(orderId).get(0);
             report.addOrder(new Order(staplesEntry, externalEntry));
@@ -44,8 +43,8 @@ public class ReportGeneratorService {
         return report;
     }
 
-    private Stream<Entry<Long, List<SessionEntry>>> sortEntries(Map<Long, List<SessionEntry>> orderToSessionData, String orderBy) {
-        return orderToSessionData.entrySet().stream().sorted(comparatorFor(orderBy));
+    private Stream<Long> sortedEntryIds(Map<Long, List<SessionEntry>> orderToSessionData, String orderBy) {
+        return orderToSessionData.entrySet().stream().sorted(comparatorFor(orderBy)).map(Entry::getKey);
     }
 
     private Comparator<Entry<Long, List<SessionEntry>>> comparatorFor(String orderBy) {
