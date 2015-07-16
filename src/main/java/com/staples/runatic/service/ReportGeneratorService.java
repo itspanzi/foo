@@ -9,6 +9,7 @@ import com.staples.runatic.persistence.StaplesSessionPersistence;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -28,7 +29,7 @@ public class ReportGeneratorService {
 
         Map<Long, List<SessionEntry>> staplesOrderData = staplesData.collect(groupingBy(SessionEntry::getOrderId));
         Map<Long, List<SessionEntry>> externalOrderData = externalData.collect(groupingBy(SessionEntry::getOrderId));
-        Stream<Long> orderIds = sortEntries(staplesOrderData, orderBy).map(Map.Entry::getKey);
+        Stream<Long> orderIds = sortEntries(staplesOrderData, orderBy).map(Entry::getKey);
 
         Report report = new Report();
 
@@ -43,11 +44,11 @@ public class ReportGeneratorService {
         return report;
     }
 
-    private Stream<Map.Entry<Long, List<SessionEntry>>> sortEntries(Map<Long, List<SessionEntry>> orderToSessionData, String orderBy) {
+    private Stream<Entry<Long, List<SessionEntry>>> sortEntries(Map<Long, List<SessionEntry>> orderToSessionData, String orderBy) {
         return orderToSessionData.entrySet().stream().sorted(comparatorFor(orderBy));
     }
 
-    private Comparator<Map.Entry<Long, List<SessionEntry>>> comparatorFor(String orderBy) {
+    private Comparator<Entry<Long, List<SessionEntry>>> comparatorFor(String orderBy) {
         if (Report.ORDER_ID_ASC.equals(orderBy)) {
             return orderIdComparator();
         }
@@ -57,23 +58,23 @@ public class ReportGeneratorService {
         return sessionComparator().reversed();
     }
 
-    private Comparator<Map.Entry<Long, List<SessionEntry>>> unitPriceComparator() {
+    private Comparator<Entry<Long, List<SessionEntry>>> unitPriceComparator() {
         return (o1, o2) -> entryFrom(o1).getUnitPriceInCents() - entryFrom(o2).getUnitPriceInCents();
     }
 
-    private Comparator<Map.Entry<Long, List<SessionEntry>>> orderIdComparator() {
+    private Comparator<Entry<Long, List<SessionEntry>>> orderIdComparator() {
         return (o1, o2) -> (int) (entryFrom(o1).getOrderId() - entryFrom(o2).getOrderId());
     }
 
-    private Comparator<Map.Entry<Long, List<SessionEntry>>> sessionComparator() {
+    private Comparator<Entry<Long, List<SessionEntry>>> sessionComparator() {
         return (o1, o2) -> sessionTypeFor(o1).compareTo(sessionTypeFor(o2));
     }
 
-    private String sessionTypeFor(Map.Entry<Long, List<SessionEntry>> o1) {
+    private String sessionTypeFor(Entry<Long, List<SessionEntry>> o1) {
         return entryFrom(o1).getSessionType();
     }
 
-    private SessionEntry entryFrom(Map.Entry<Long, List<SessionEntry>> o1) {
+    private SessionEntry entryFrom(Entry<Long, List<SessionEntry>> o1) {
         return o1.getValue().get(0);
     }
 }
