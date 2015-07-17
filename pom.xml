@@ -18,7 +18,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.3.0.RC1</version>
                 <configuration>
-                    <war>${project.basedir}/target/reports-1.0-SNAPSHOT.war</war>
+                    <war>${project.basedir}/target/reports-1.0.0.war</war>
                 </configuration>
             </plugin>
             <plugin>
