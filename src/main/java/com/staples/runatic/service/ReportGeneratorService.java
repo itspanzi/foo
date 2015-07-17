@@ -5,11 +5,15 @@ import com.staples.runatic.model.Report;
 import com.staples.runatic.model.SessionEntry;
 import com.staples.runatic.persistence.ExternalSessionPersistence;
 import com.staples.runatic.persistence.StaplesSessionPersistence;
+import com.staples.runatic.service.cache.SessionEntryCache;
 
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Stream;
+
+import static com.staples.runatic.service.cache.SessionEntryCache.EXTERNAL_ORDER_DATA_KEY;
+import static com.staples.runatic.service.cache.SessionEntryCache.STAPLES_ORDER_DATA_KEY;
 
 public class ReportGeneratorService {
     public StaplesSessionPersistence staplesPersistence;
@@ -23,12 +27,13 @@ public class ReportGeneratorService {
     }
 
     public Report generateReport(String orderBy) {
-        Map<Long, SessionEntry> staplesOrderData = cache.get(SessionEntryCache.STAPLES_ORDER_DATA_KEY, staplesPersistence::sessionByOrderId);
-        Map<Long, SessionEntry> externalOrderData = cache.get(SessionEntryCache.EXTERNAL_ORDER_DATA_KEY, externalPersistence::sessionByOrderId);
+        // The grouped session entries are cached. The sorting however happens each time this method is called.
+        Map<Long, SessionEntry> staplesOrderData = cache.get(STAPLES_ORDER_DATA_KEY, staplesPersistence::sessionByOrderId);
+        Map<Long, SessionEntry> externalOrderData = cache.get(EXTERNAL_ORDER_DATA_KEY, externalPersistence::sessionByOrderId);
 
         Report report = new Report();
 
-        sortedEntryIds(staplesOrderData, orderBy).forEach(orderId -> {
+        sortedOrderIds(staplesOrderData, orderBy).forEach(orderId -> {
             SessionEntry staplesEntry = staplesOrderData.get(orderId);
             SessionEntry externalEntry = externalOrderData.get(orderId);
             report.addOrder(new Order(staplesEntry, externalEntry));
@@ -39,7 +44,7 @@ public class ReportGeneratorService {
         return report;
     }
 
-    private Stream<Long> sortedEntryIds(Map<Long, SessionEntry> orderToSessionData, String orderBy) {
+    private Stream<Long> sortedOrderIds(Map<Long, SessionEntry> orderToSessionData, String orderBy) {
         return orderToSessionData.entrySet().stream().sorted(comparatorFor(orderBy)).map(Entry::getKey);
     }
 

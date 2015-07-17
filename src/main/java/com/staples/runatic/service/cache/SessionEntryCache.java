@@ -1,4 +1,4 @@
-package com.staples.runatic.service;
+package com.staples.runatic.service.cache;
 
 import com.staples.runatic.model.SessionEntry;
 
@@ -12,8 +12,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * This class represents a cache store for session entries
  */
 public class SessionEntryCache {
-    static final String STAPLES_ORDER_DATA_KEY = "staples_order_data_key";
-    static final String EXTERNAL_ORDER_DATA_KEY = "external_order_data_key";
+    public static final String STAPLES_ORDER_DATA_KEY = "staples_order_data_key";
+    public static final String EXTERNAL_ORDER_DATA_KEY = "external_order_data_key";
 
     private Map<String, Map<Long, SessionEntry>> cache = new ConcurrentHashMap<>();
 
@@ -23,12 +23,11 @@ public class SessionEntryCache {
         Map<Long, SessionEntry> cachedValue = cache.get(key);
         if (cachedValue == null) {
             try {
+                // Though we use a concurrent map, the locking makes sure we are thread safe independent of the cache store.
                 obtainLock();
-                // Another might have populated the cache. Check first.
+                // Another thread might have populated the cache so check first.
                 cachedValue = cache.get(key);
-                if (cachedValue != null) {
-                    return cachedValue;
-                } else {
+                if (cachedValue == null) {
                     // Looks like no one has cached this yet. Lets cache it.
                     cachedValue = cachePopulator.populateCache();
                     cache.putIfAbsent(key, cachedValue);
