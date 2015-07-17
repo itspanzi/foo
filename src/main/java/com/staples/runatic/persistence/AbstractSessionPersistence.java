@@ -63,7 +63,7 @@ public abstract class AbstractSessionPersistence {
 
     private void validateHeaders(String[] headers) {
         if (!Arrays.equals(headers, expectedHeaders())) {
-            throw new RuntimeException("The format of the external file has changed. Cannot parse this file.");
+            throw new RuntimeException("The format of the file or the column order has changed. Cannot parse this file.");
         }
     }
 

@@ -27,7 +27,7 @@ public class ExternalSessionPersistenceTest {
             new ExternalSessionPersistence("different_external_data.psv").entriesStream().collect(Collectors.toList());
             fail("Should have gotten an exception since the data format has changed");
         } catch (RuntimeException expected) {
-            assertThat(expected.getMessage(), is("The format of the external file has changed. Cannot parse this file."));
+            assertThat(expected.getMessage(), is("The format of the file or the column order has changed. Cannot parse this file."));
         }
     }
 }
