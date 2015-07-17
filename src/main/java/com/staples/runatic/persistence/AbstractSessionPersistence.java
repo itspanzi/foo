@@ -38,16 +38,6 @@ public abstract class AbstractSessionPersistence {
 
     protected abstract String[] expectedHeaders();
 
-    public Stream<SessionEntry> entriesStream() {
-        try (Stream<String> firstLineStream = Files.lines(Paths.get(dataStore.toURI()))) {
-            validateHeaders(headers(firstLineStream));
-            Stream<String> lines = Files.lines(Paths.get(dataStore.toURI()));
-            return lines.skip(1).map(rowMapper(rowHandler));
-        } catch (IOException e) {
-            throw new RuntimeException(String.format("There was an error while reading the session entries from the data store: %s", dataStore.getName()));
-        }
-    }
-
     public Map<Long, SessionEntry> sessionByOrderId() {
         Map<Long, SessionEntry> groupedByOrder = new HashMap<>();
         // We assume that the order id is unique in the given store.
@@ -55,6 +45,16 @@ public abstract class AbstractSessionPersistence {
             groupedByOrder.put(entry.getKey(), entry.getValue().get(0));
         }
         return groupedByOrder;
+    }
+
+    Stream<SessionEntry> entriesStream() {
+        try (Stream<String> firstLineStream = Files.lines(Paths.get(dataStore.toURI()))) {
+            validateHeaders(headers(firstLineStream));
+            Stream<String> lines = Files.lines(Paths.get(dataStore.toURI()));
+            return lines.skip(1).map(rowMapper(rowHandler));
+        } catch (IOException e) {
+            throw new RuntimeException(String.format("There was an error while reading the session entries from the data store: %s", dataStore.getName()));
+        }
     }
 
     private Map<Long, List<SessionEntry>> groupedSessions() {
