@@ -1,5 +1,6 @@
 package com.staples.runatic.service.cache;
 
+import com.rits.cloning.Cloner;
 import com.staples.runatic.model.SessionEntry;
 
 import java.util.Map;
@@ -36,7 +37,8 @@ public class SessionEntryCache {
                 cacheLock.unlock();
             }
         }
-        return cachedValue;
+        // Return a deep clone so that callers don't accidentally modify cached data.
+        return new Cloner().deepClone(cachedValue);
     }
 
     private void obtainLock() {
