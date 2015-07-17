@@ -15,8 +15,7 @@ import java.util.Map;
 import static com.staples.runatic.model.Report.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ReportGeneratorServiceTest {
 
@@ -101,6 +100,23 @@ public class ReportGeneratorServiceTest {
                 new Order(new SessionEntry("5678", 3500, 0, 100, "test"), new SessionEntry("5678", 3500, 0, 100, "test")),
                 new Order(new SessionEntry("4455", 12500, 1500, 3000, "unmanaged"), new SessionEntry("4455", 12500, 1000, 3000, "unmanaged")))));
     }
+
+    @Test
+    public void shouldCacheTheOrderToSessionDataForEachStore() throws Exception {
+        StaplesSessionPersistence staplesMock = mock(StaplesSessionPersistence.class);
+        ExternalSessionPersistence externalMock = mock(ExternalSessionPersistence.class);
+        when(staplesMock.sessionByOrderId()).thenReturn(staplesEntries());
+        when(externalMock.sessionByOrderId()).thenReturn(enternalEntries());
+
+        ReportGeneratorService reportService = new ReportGeneratorService(staplesMock, externalMock);
+
+        reportService.generateReport(SESSION_TYPE_DESC);
+        reportService.generateReport(SESSION_TYPE_DESC);
+
+        verify(staplesMock, times(1)).sessionByOrderId();
+        verify(externalMock, times(1)).sessionByOrderId();
+    }
+
 
     private static Map<Long, SessionEntry> enternalEntries() {
         Map<Long, SessionEntry> orderIdToEntries = new HashMap<>();

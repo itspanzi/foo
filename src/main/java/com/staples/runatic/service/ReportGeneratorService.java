@@ -11,20 +11,20 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.groupingBy;
-
 public class ReportGeneratorService {
     public StaplesSessionPersistence staplesPersistence;
     public ExternalSessionPersistence externalPersistence;
+    private final SessionEntryCache cache;
 
     public ReportGeneratorService(StaplesSessionPersistence staplesPersistence, ExternalSessionPersistence externalPersistence) {
         this.staplesPersistence = staplesPersistence;
         this.externalPersistence = externalPersistence;
+        cache = new SessionEntryCache();
     }
 
     public Report generateReport(String orderBy) {
-        Map<Long, SessionEntry> staplesOrderData = staplesPersistence.sessionByOrderId();
-        Map<Long, SessionEntry> externalOrderData = externalPersistence.sessionByOrderId();
+        Map<Long, SessionEntry> staplesOrderData = cache.get(SessionEntryCache.STAPLES_ORDER_DATA_KEY, staplesPersistence::sessionByOrderId);
+        Map<Long, SessionEntry> externalOrderData = cache.get(SessionEntryCache.EXTERNAL_ORDER_DATA_KEY, externalPersistence::sessionByOrderId);
 
         Report report = new Report();
 
