@@ -10,12 +10,16 @@ import com.staples.runatic.service.cache.SessionEntryCache;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import static com.staples.runatic.service.cache.SessionEntryCache.EXTERNAL_ORDER_DATA_KEY;
 import static com.staples.runatic.service.cache.SessionEntryCache.STAPLES_ORDER_DATA_KEY;
 
 public class ReportGeneratorService {
+    private static final Logger logger = Logger.getLogger(ReportGeneratorService.class.getName());
+
     public StaplesSessionPersistence staplesPersistence;
     public ExternalSessionPersistence externalPersistence;
     private final SessionEntryCache cache;
@@ -40,7 +44,9 @@ public class ReportGeneratorService {
             report.addRunaSummary(staplesEntry);
             report.addMerchantSummary(externalEntry);
         });
-
+        if (logger.isLoggable(Level.FINE)) {
+            logger.fine("Successfully computed the report");
+        }
         return report;
     }
 

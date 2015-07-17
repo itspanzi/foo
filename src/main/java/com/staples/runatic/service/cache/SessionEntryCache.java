@@ -8,11 +8,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Logger;
 
 /**
  * This class represents a cache store for session entries
  */
 public class SessionEntryCache {
+    private static final Logger logger = Logger.getLogger(SessionEntryCache.class.getName());
+
     public static final String STAPLES_ORDER_DATA_KEY = "staples_order_data_key";
     public static final String EXTERNAL_ORDER_DATA_KEY = "external_order_data_key";
 
@@ -44,10 +47,14 @@ public class SessionEntryCache {
     private void obtainLock() {
         try {
             if (!cacheLock.tryLock(3, TimeUnit.SECONDS)) {
-                throw new RuntimeException("Couldn't secure a lock. The server is busy. Please try again in sometime");
+                String message = "Couldn't secure a lock. The server is busy. Please try again in sometime";
+                logger.severe(message);
+                throw new RuntimeException(message);
             }
         } catch (InterruptedException e) {
-            throw new RuntimeException("Got interrupted during lock acquisition. Please try again in sometime");
+            String message = "Got interrupted during lock acquisition. Please try again in sometime";
+            logger.severe(message);
+            throw new RuntimeException(message);
         }
     }
 

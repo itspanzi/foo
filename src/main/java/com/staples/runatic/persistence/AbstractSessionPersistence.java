@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -21,6 +23,7 @@ import static java.util.stream.Collectors.groupingBy;
  * This class represents streaming session data that is stored in a file.
  */
 public abstract class AbstractSessionPersistence {
+    private static final Logger logger = Logger.getLogger(AbstractSessionPersistence.class.getName());
 
     private final File dataStore;
     private final RowHandler rowHandler;
@@ -28,7 +31,9 @@ public abstract class AbstractSessionPersistence {
     public AbstractSessionPersistence(String dataStoreName, String separator) {
         URL resource = Thread.currentThread().getContextClassLoader().getResource(dataStoreName);
         if (resource == null) {
-            throw new RuntimeException(String.format("Oh oh! The data store '%s' is not found. Something is not right here.", dataStoreName));
+            String message = String.format("Oh oh! The data store '%s' is not found. Something is not right here.", dataStoreName);
+            logger.log(Level.SEVERE, message);
+            throw new RuntimeException(message);
         }
         this.dataStore = new File(resource.getFile());
         this.rowHandler = RowHandler.handlerFor(separator);
@@ -53,7 +58,9 @@ public abstract class AbstractSessionPersistence {
             Stream<String> lines = Files.lines(Paths.get(dataStore.toURI()));
             return lines.skip(1).map(rowMapper(rowHandler));
         } catch (IOException e) {
-            throw new RuntimeException(String.format("There was an error while reading the session entries from the data store: %s", dataStore.getName()));
+            String message = String.format("There was an error while reading the session entries from the data store: %s", dataStore.getName());
+            logger.log(Level.SEVERE, message);
+            throw new RuntimeException(message);
         }
     }
 
@@ -63,7 +70,9 @@ public abstract class AbstractSessionPersistence {
 
     private void validateHeaders(String[] headers) {
         if (!Arrays.equals(headers, expectedHeaders())) {
-            throw new RuntimeException("The format of the file or the column order has changed. Cannot parse this file.");
+            String message = "The format of the file or the column order has changed. Cannot parse this file.";
+            logger.log(Level.SEVERE, message);
+            throw new RuntimeException(message);
         }
     }
 
