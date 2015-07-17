@@ -9,11 +9,10 @@ import com.staples.runatic.persistence.StaplesSessionPersistence;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
+import java.util.HashMap;
+import java.util.Map;
 
-import static com.staples.runatic.model.Report.ORDER_ID_ASC;
-import static com.staples.runatic.model.Report.SESSION_TYPE_DESC;
-import static com.staples.runatic.model.Report.UNIT_PRICE_DOLLARS_ASC;
+import static com.staples.runatic.model.Report.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -25,8 +24,8 @@ public class ReportGeneratorServiceTest {
     public void shouldReturnANewReportWithSummaries() throws Exception {
         StaplesSessionPersistence staplesMock = mock(StaplesSessionPersistence.class);
         ExternalSessionPersistence externalMock = mock(ExternalSessionPersistence.class);
-        when(staplesMock.entriesStream()).thenReturn(staplesEntries());
-        when(externalMock.entriesStream()).thenReturn(enternalEntries());
+        when(staplesMock.sessionByOrderId()).thenReturn(staplesEntries());
+        when(externalMock.sessionByOrderId()).thenReturn(enternalEntries());
 
         ReportGeneratorService reportService = new ReportGeneratorService(staplesMock, externalMock);
 
@@ -40,8 +39,8 @@ public class ReportGeneratorServiceTest {
     public void shouldReturnOrdersSortedBySessionType() throws Exception {
         StaplesSessionPersistence staplesMock = mock(StaplesSessionPersistence.class);
         ExternalSessionPersistence externalMock = mock(ExternalSessionPersistence.class);
-        when(staplesMock.entriesStream()).thenReturn(staplesEntries());
-        when(externalMock.entriesStream()).thenReturn(enternalEntries());
+        when(staplesMock.sessionByOrderId()).thenReturn(staplesEntries());
+        when(externalMock.sessionByOrderId()).thenReturn(enternalEntries());
 
         ReportGeneratorService reportService = new ReportGeneratorService(staplesMock, externalMock);
 
@@ -57,8 +56,8 @@ public class ReportGeneratorServiceTest {
     public void shouldReturnOrdersSortedBySessionTypeIfNoOrderIsSpecified() throws Exception {
         StaplesSessionPersistence staplesMock = mock(StaplesSessionPersistence.class);
         ExternalSessionPersistence externalMock = mock(ExternalSessionPersistence.class);
-        when(staplesMock.entriesStream()).thenReturn(staplesEntries());
-        when(externalMock.entriesStream()).thenReturn(enternalEntries());
+        when(staplesMock.sessionByOrderId()).thenReturn(staplesEntries());
+        when(externalMock.sessionByOrderId()).thenReturn(enternalEntries());
 
         ReportGeneratorService reportService = new ReportGeneratorService(staplesMock, externalMock);
         Report report = reportService.generateReport("");
@@ -74,8 +73,8 @@ public class ReportGeneratorServiceTest {
     public void shouldReturnOrdersSortedByOrderIdAscending() throws Exception {
         StaplesSessionPersistence staplesMock = mock(StaplesSessionPersistence.class);
         ExternalSessionPersistence externalMock = mock(ExternalSessionPersistence.class);
-        when(staplesMock.entriesStream()).thenReturn(staplesEntries());
-        when(externalMock.entriesStream()).thenReturn(enternalEntries());
+        when(staplesMock.sessionByOrderId()).thenReturn(staplesEntries());
+        when(externalMock.sessionByOrderId()).thenReturn(enternalEntries());
 
         ReportGeneratorService reportService = new ReportGeneratorService(staplesMock, externalMock);
         Report report = reportService.generateReport(ORDER_ID_ASC);
@@ -90,8 +89,8 @@ public class ReportGeneratorServiceTest {
     public void shouldReturnOrdersSortedByUnitPriceAscending() throws Exception {
         StaplesSessionPersistence staplesMock = mock(StaplesSessionPersistence.class);
         ExternalSessionPersistence externalMock = mock(ExternalSessionPersistence.class);
-        when(staplesMock.entriesStream()).thenReturn(staplesEntries());
-        when(externalMock.entriesStream()).thenReturn(enternalEntries());
+        when(staplesMock.sessionByOrderId()).thenReturn(staplesEntries());
+        when(externalMock.sessionByOrderId()).thenReturn(enternalEntries());
 
         ReportGeneratorService reportService = new ReportGeneratorService(staplesMock, externalMock);
         Report report = reportService.generateReport(UNIT_PRICE_DOLLARS_ASC);
@@ -103,14 +102,20 @@ public class ReportGeneratorServiceTest {
                 new Order(new SessionEntry("4455", 12500, 1500, 3000, "unmanaged"), new SessionEntry("4455", 12500, 1000, 3000, "unmanaged")))));
     }
 
-    private static Stream<SessionEntry> enternalEntries() {
-        return Arrays.asList(new SessionEntry("1234", 200, 10, 10, "control"), new SessionEntry("5678", 3500, 0, 100, "test"),
-                new SessionEntry("4455", 12500, 1000, 3000, "unmanaged")).stream();
+    private static Map<Long, SessionEntry> enternalEntries() {
+        Map<Long, SessionEntry> orderIdToEntries = new HashMap<>();
+        orderIdToEntries.put(1234L, new SessionEntry("1234", 200, 10, 10, "control"));
+        orderIdToEntries.put(5678L, new SessionEntry("5678", 3500, 0, 100, "test"));
+        orderIdToEntries.put(4455L, new SessionEntry("4455", 12500, 1000, 3000, "unmanaged"));
+        return orderIdToEntries;
     }
 
-    private static Stream<SessionEntry> staplesEntries() {
-        return Arrays.asList(new SessionEntry("1234", 100, 18, 15, "control"), new SessionEntry("5678", 3500, 0, 100, "test"),
-                new SessionEntry("4455", 12500, 1500, 3000, "unmanaged")).stream();
+    private static Map<Long, SessionEntry> staplesEntries() {
+        Map<Long, SessionEntry> orderIdToEntries = new HashMap<>();
+        orderIdToEntries.put(1234L, new SessionEntry("1234", 100, 18, 15, "control"));
+        orderIdToEntries.put(5678L, new SessionEntry("5678", 3500, 0, 100, "test"));
+        orderIdToEntries.put(4455L, new SessionEntry("4455", 12500, 1500, 3000, "unmanaged"));
+        return orderIdToEntries;
     }
 
 }

@@ -7,7 +7,6 @@ import com.staples.runatic.persistence.ExternalSessionPersistence;
 import com.staples.runatic.persistence.StaplesSessionPersistence;
 
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Stream;
@@ -24,17 +23,14 @@ public class ReportGeneratorService {
     }
 
     public Report generateReport(String orderBy) {
-        Stream<SessionEntry> externalData = externalPersistence.entriesStream();
-        Stream<SessionEntry> staplesData = staplesPersistence.entriesStream();
-
-        Map<Long, List<SessionEntry>> staplesOrderData = staplesData.collect(groupingBy(SessionEntry::getOrderId));
-        Map<Long, List<SessionEntry>> externalOrderData = externalData.collect(groupingBy(SessionEntry::getOrderId));
+        Map<Long, SessionEntry> staplesOrderData = staplesPersistence.sessionByOrderId();
+        Map<Long, SessionEntry> externalOrderData = externalPersistence.sessionByOrderId();
 
         Report report = new Report();
 
         sortedEntryIds(staplesOrderData, orderBy).forEach(orderId -> {
-            SessionEntry staplesEntry = staplesOrderData.get(orderId).get(0);
-            SessionEntry externalEntry = externalOrderData.get(orderId).get(0);
+            SessionEntry staplesEntry = staplesOrderData.get(orderId);
+            SessionEntry externalEntry = externalOrderData.get(orderId);
             report.addOrder(new Order(staplesEntry, externalEntry));
             report.addRunaSummary(staplesEntry);
             report.addMerchantSummary(externalEntry);
@@ -43,11 +39,11 @@ public class ReportGeneratorService {
         return report;
     }
 
-    private Stream<Long> sortedEntryIds(Map<Long, List<SessionEntry>> orderToSessionData, String orderBy) {
+    private Stream<Long> sortedEntryIds(Map<Long, SessionEntry> orderToSessionData, String orderBy) {
         return orderToSessionData.entrySet().stream().sorted(comparatorFor(orderBy)).map(Entry::getKey);
     }
 
-    private Comparator<Entry<Long, List<SessionEntry>>> comparatorFor(String orderBy) {
+    private Comparator<Entry<Long, SessionEntry>> comparatorFor(String orderBy) {
         if (Report.ORDER_ID_ASC.equals(orderBy)) {
             return orderIdComparator();
         }
@@ -57,23 +53,19 @@ public class ReportGeneratorService {
         return sessionComparator().reversed();
     }
 
-    private Comparator<Entry<Long, List<SessionEntry>>> unitPriceComparator() {
-        return (o1, o2) -> entryFrom(o1).getUnitPriceInCents() - entryFrom(o2).getUnitPriceInCents();
+    private Comparator<Entry<Long, SessionEntry>> unitPriceComparator() {
+        return (o1, o2) -> o1.getValue().getUnitPriceInCents() - o2.getValue().getUnitPriceInCents();
     }
 
-    private Comparator<Entry<Long, List<SessionEntry>>> orderIdComparator() {
-        return (o1, o2) -> (int) (entryFrom(o1).getOrderId() - entryFrom(o2).getOrderId());
+    private Comparator<Entry<Long, SessionEntry>> orderIdComparator() {
+        return (o1, o2) -> (int) (o1.getValue().getOrderId() - o2.getValue().getOrderId());
     }
 
-    private Comparator<Entry<Long, List<SessionEntry>>> sessionComparator() {
+    private Comparator<Entry<Long, SessionEntry>> sessionComparator() {
         return (o1, o2) -> sessionTypeFor(o1).compareTo(sessionTypeFor(o2));
     }
 
-    private String sessionTypeFor(Entry<Long, List<SessionEntry>> o1) {
-        return entryFrom(o1).getSessionType();
-    }
-
-    private SessionEntry entryFrom(Entry<Long, List<SessionEntry>> o1) {
-        return o1.getValue().get(0);
+    private String sessionTypeFor(Entry<Long, SessionEntry> o1) {
+        return o1.getValue().getSessionType();
     }
 }

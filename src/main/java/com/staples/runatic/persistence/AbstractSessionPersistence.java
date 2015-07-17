@@ -8,8 +8,14 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.groupingBy;
 
 /**
  * This class represents streaming session data that is stored in a file.
@@ -40,6 +46,19 @@ public abstract class AbstractSessionPersistence {
         } catch (IOException e) {
             throw new RuntimeException(String.format("There was an error while reading the session entries from the data store: %s", dataStore.getName()));
         }
+    }
+
+    public Map<Long, SessionEntry> sessionByOrderId() {
+        Map<Long, SessionEntry> groupedByOrder = new HashMap<>();
+        // We assume that the order id is unique in the given store.
+        for (Entry<Long, List<SessionEntry>> entry : groupedSessions().entrySet()) {
+            groupedByOrder.put(entry.getKey(), entry.getValue().get(0));
+        }
+        return groupedByOrder;
+    }
+
+    private Map<Long, List<SessionEntry>> groupedSessions() {
+        return entriesStream().collect(groupingBy(SessionEntry::getOrderId));
     }
 
     private void validateHeaders(String[] headers) {
