@@ -22,3 +22,8 @@ This solution is implemented using Java. Please take a look at the instructions 
 * The war will be available at _target/reports-1.0.0.war_. You can copy this over to any servlet container of your choice. I have tested this with Tomcat and Jetty.
 * After deployment, you can access the service at _http://HOSTNAME:PORT/WEB_CONTEXT/runatic/report_
 
+# Tech Stack & Design
+
+The project uses [Jersey (jax-rs)](https://jersey.java.net) a light weight REST framework to implement the service. There is a lot of use of the new JDK 8 streaming API which along with lambda expressions reduce code massively.
+
+The data store files are read once & cached for the duration of the server run. Since the REST service class is a singleton, the ReportGeneratorService class is created once. This is where the cache resides.
